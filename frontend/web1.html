@@ -5,14 +5,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale= 1.0" >
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Lets Ghumne Chale</title>
+<title>Travel Web App</title>
 
 <link rel="stylesheet" href="web1.css" />  
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+ <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> 
+
+<script src="index.js"></script>
 
 </head>
 <body>
@@ -29,7 +31,7 @@
 			<div class="navbar">
 				<ul>
 					<li><a href="#">HOME</a></li>
-					<li><a href="#">ABOUT</a></li>
+					<li><a href="#About">ABOUT</a></li>
 					<li><a href="#">SERVICE</a></li>
 					<li><a href="#">WORK</a></li>
 					<li><a href="login.html">LOGIN</a></li>
@@ -40,14 +42,15 @@
         <div class="cover-img"><!--COVERPAGE-->
         	<div class="cover-content">
         		<h1>TRAVEL</h1>
-        		<p>Get the best travel expierence with us </p>
-        		<button>EXPLORE</button>
+        		<p>Get the best travel experience with us </p>
+        		<button onclick="window.location.href='#gallery'">EXPLORE</button>
         	</div>
         </div>
 
-        <div class="about-section"><!--ABOUT-->
-        	<h2>About Us</h2>
-        	<p class="para">We three are from NITK IT , we are here to present to the best travelling site and best travelling expierence</p>
+	<div id="About"><br>
+		<div class="about-section"><!--ABOUT-->
+			<h2>About Us</h2>
+        	<p class="para">We are here from NITK to provide you with best travelling experience</p>
             <div class="features">
                 <div class="new1">
      		        <div class="feature">
@@ -82,9 +85,11 @@
      		        </div>
                 </div>
      	    </div>
-        </div>
-
-        <div class="gallary-section"><!--GALLARY-->
+		</div>
+	</div>
+	
+	<div id="gallery"><br>
+        <div class="gallary-section"><!--GALLERY-->
         	<h2>Explore</h2>
         	<p class="para">Ashok Asis & Jeeu</p>
         	<div class="container">
@@ -111,7 +116,8 @@
         		</div>
         	  </div>
         	</div>
-        </div>
+		</div>
+	</div>
 
         <div class="contact-section"><!--CONTACT-->
         	<div class="contact-section1">

@@ -172,6 +172,7 @@ nav ul li a:hover{
 .about-section .para{
 	width: 70%;
 	margin: 15px auto;
+	font-size: large;
 	text-align: center;
 	color: #fff;
 	margin-bottom: 40px;
@@ -180,6 +181,7 @@ nav ul li a:hover{
 .features{
 	display: flex;
 	height: auto;
+	justify-content: center;
 	color: #fff;
 	padding: 25px 0;
 }

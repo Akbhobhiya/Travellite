@@ -7,11 +7,11 @@ This is the Smart Tourism Guide website made for the WTA project. We've used Nod
   <li>Login</li>
   <li>Search for Destination</li>
   <li>Book the ticket</li>
-  <li>Use the tariff plans if given(discount)(<i>Still to be implemented</i>)</li>
+ <!-- <li>Use the tariff plans if given(discount)(<i>Still to be implemented</i>)</li>-->
   <li>Fill and edit personal details</li>
   <li>Hotel booking</li>
-  <li>Nearby ATM search</li>
-  <li>Receive invoice(<i>Still to be implemented</i>)</li>
+ <!-- <li>Nearby ATM search</li>
+  <li>Receive invoice(<i>Still to be implemented</i>)</li> -->
   <li>Train ticket booking and searching of train</li>
   <li>Change of password</li>
 </ul>
@@ -21,9 +21,9 @@ This is the Smart Tourism Guide website made for the WTA project. We've used Nod
   <li>Login</li>
   <li>Update information for member</li>
   <li>Update information for admin</li>
-  <li>Update city and destinations(<i>Still to be implemented</i>)</li>
+  <li>Update city and destinations</li>
   <li>Print invoice(<i>Still to be implemented</i>)</li>
-  <li>Can check All data of complete site(<i>Still to be implemented</i>)</li>
+  <li>Can check All data of complete site</li>
   <li>Change of Password</li>
 </ul>
 

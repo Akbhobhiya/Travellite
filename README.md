@@ -49,6 +49,11 @@ $ cd Travel-Guide-WebApplication
 ```sh
 $ npm install 
 ```
-
+### Contributer
+<ul>
+  <li> Ashok Bhobhiya <li>
+  <li> Asis Rout <li>
+  <li> Jeeukrishnan Kashyap <li>
+<ul>
 ### Contributing
 Please feel free to send a pull request or create an issue if you find any.

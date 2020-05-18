@@ -51,9 +51,9 @@ $ npm install
 ```
 ### Contributer
 <ul>
-  <li> <a href="https://github.com/Akbhobhiya">Ashok Bhobhiya</a> <li>
-  <li><a href="https://github.com/AsisRout">Asis Rout</a> <li>
-  <li><a href="https://github.com/Jeeukrishnan">Jeeukrishnan Kashyap </a> <li>
-<ul>
-##### Wish to Contributing
+  <li> <a href="https://github.com/Akbhobhiya">Ashok Bhobhiya</a> </li>
+  <li><a href="https://github.com/AsisRout">Asis Rout</a> </li>
+  <li><a href="https://github.com/Jeeukrishnan">Jeeukrishnan Kashyap </a> </li>
+</ul>
+### Wish to Contributing
 Please feel free to send a pull request or create an issue if you find any.

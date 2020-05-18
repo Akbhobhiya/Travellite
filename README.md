@@ -22,7 +22,7 @@ This is the Smart Tourism Guide website made for the WTA project. We've used Nod
   <li>Update information for member</li>
   <li>Update information for admin</li>
   <li>Update city and destinations</li>
-  <li>Print invoice(<i>Still to be implemented</i>)</li>
+  <!--<li>Print invoice(<i>Still to be implemented</i>)</li>-->
   <li>Can check All data of complete site</li>
   <li>Change of Password</li>
 </ul>

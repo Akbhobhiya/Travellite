@@ -29,7 +29,7 @@ This is the Smart Tourism Guide website made for the WTA project. We've used Nod
 
 ## How to setup the project
 
-The website is built using Node.JS and ejs so make sure you have Node.JS and npm installed already.
+The website is built using Node.JS and React.JS so make sure you have Node.JS and npm installed already.
 
 #### Run the app
 ```js

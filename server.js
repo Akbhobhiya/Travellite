@@ -31,6 +31,7 @@ app.get("/",function(req,res)
     res.sendFile('/frontend/web1.html',{root: __dirname});
 })
 
+
 app.post("/",function(req,res){
     const Name="'"+ req.body.Name + "'";
     const Email= "'" + req.body.Email + "'";

@@ -1,6 +1,6 @@
-#database smart_travel_guide_webApp
+# smart_travel_guide_webApp
 
-create table users (
+## create table users (
 	username varchar(10) not null,
 	password varchar(100) not null,
 	fullname varchar(20) not null,
@@ -11,7 +11,7 @@ create table users (
 );
 
 
-create table tourist_place (
+## create table tourist_place (
     id INT NOT NULL AUTO_INCREMENT,
     city VARCHAR(30) NOT NULL,
     region VARCHAR(20) NOT NULL,
@@ -24,7 +24,7 @@ create table tourist_place (
     CHECK (dailyCost > 0)
 );
 
-create table review (
+## create table review (
     id INT NOT NULL auto_increment,
     numStars INT NOT NULL,
     locationid int not null,
@@ -38,7 +38,7 @@ create table review (
 );
 
 
-create table place_pics (
+## create table place_pics (
        id int not null auto_increment,
        locationid int not null,
        caption varchar(50) default 'pic',
@@ -49,7 +49,7 @@ create table place_pics (
        FOREIGN KEY (locationid) REFERENCES tourist_place(id)
 );
 
-create table payment (
+## create table payment (
        id INT NOT NULL AUTO_INCREMENT,
        username VARCHAR(20) not null,
        amount DECIMAL(10,2) NOT NULL,
@@ -61,7 +61,7 @@ create table payment (
 );
 
 
-create table tourbook(
+## create table tourbook(
        id int not null,
        username varchar(20) null,
        locationid int not null,
@@ -77,7 +77,7 @@ create table tourbook(
 );
 
 
-create table hotel (
+## create table hotel (
        id INT NOT NULL auto_increment,
        name varchar(100) NOT NULL,
        dailyCost DECIMAL(6,2) NOT NULL,
@@ -92,7 +92,7 @@ create table hotel (
        CHECK (noOfStar >= 1 AND noOfStar <= 10)
 );
 
-create table hotelbook(
+## create table hotelbook(
        id int not null,
        username varchar(20) null,
        hotelid int not null,
@@ -106,7 +106,7 @@ create table hotelbook(
        FOREIGN KEY(paymentid) REFERENCES payment(id)
 );
 
-create table booking (
+## create table booking (
        id INT NOT NULL auto_increment,
        username varchar(20) not null,
        hotelbookid int not null,

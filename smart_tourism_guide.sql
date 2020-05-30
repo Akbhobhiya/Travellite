@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.20, for Linux (x86_64)
 --
--- Host: localhost    Database: smart_tourism_guide
+-- Host: localhost    Database: smart_travel_guide_webApp
 -- ------------------------------------------------------
 -- Server version	8.0.20-0ubuntu0.20.04.1
 
@@ -16,109 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `admin`
+-- Table structure for table `booking`
 --
 
-DROP TABLE IF EXISTS `admin`;
+DROP TABLE IF EXISTS `booking`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `admin` (
-  `a_id` int NOT NULL AUTO_INCREMENT,
-  `a_fname` varchar(100) NOT NULL,
-  `a_lname` varchar(100) DEFAULT NULL,
-  `a_age` int NOT NULL,
-  `a_phone` varchar(20) DEFAULT NULL,
-  `a_mail` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`a_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `booking` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `hotelbookid` int NOT NULL,
+  `tourbookid` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `hotelbookid` (`hotelbookid`),
+  KEY `tourbookid` (`tourbookid`),
+  KEY `username` (`username`),
+  CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`hotelbookid`) REFERENCES `hotelbook` (`id`),
+  CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`tourbookid`) REFERENCES `tourbook` (`id`),
+  CONSTRAINT `booking_ibfk_3` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=8891 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `admin`
+-- Dumping data for table `booking`
 --
 
-LOCK TABLES `admin` WRITE;
-/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `atm`
---
-
-DROP TABLE IF EXISTS `atm`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `atm` (
-  `atm_id` varchar(20) NOT NULL,
-  `atm_name` varchar(50) NOT NULL,
-  `atm_type` varchar(20) DEFAULT NULL,
-  `atm_address` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`atm_name`),
-  KEY `atm_id` (`atm_id`),
-  CONSTRAINT `atm_ibfk_1` FOREIGN KEY (`atm_id`) REFERENCES `city` (`city_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `atm`
---
-
-LOCK TABLES `atm` WRITE;
-/*!40000 ALTER TABLE `atm` DISABLE KEYS */;
-/*!40000 ALTER TABLE `atm` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `city`
---
-
-DROP TABLE IF EXISTS `city`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `city` (
-  `city_id` varchar(20) NOT NULL,
-  `city_name` varchar(20) NOT NULL,
-  `city_pin` varchar(20) NOT NULL,
-  PRIMARY KEY (`city_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `city`
---
-
-LOCK TABLES `city` WRITE;
-/*!40000 ALTER TABLE `city` DISABLE KEYS */;
-/*!40000 ALTER TABLE `city` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `customer`
---
-
-DROP TABLE IF EXISTS `customer`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `customer` (
-  `c_id` int NOT NULL AUTO_INCREMENT,
-  `c_fname` varchar(100) NOT NULL,
-  `c_lname` varchar(100) DEFAULT NULL,
-  `c_age` int NOT NULL,
-  `c_phone` varchar(20) DEFAULT NULL,
-  `c_mail` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`c_id`),
-  CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `admin` (`a_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `customer`
---
-
-LOCK TABLES `customer` WRITE;
-/*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-/*!40000 ALTER TABLE `customer` ENABLE KEYS */;
+LOCK TABLES `booking` WRITE;
+/*!40000 ALTER TABLE `booking` DISABLE KEYS */;
+INSERT INTO `booking` VALUES (8888,'akbhobhiya',7777,1111),(8889,'asisrout',7778,1112),(8890,'jeeuk',7779,1113);
+/*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -129,14 +55,20 @@ DROP TABLE IF EXISTS `hotel`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hotel` (
-  `hotel_id` varchar(20) NOT NULL,
-  `h_name` varchar(50) NOT NULL,
-  `h_contact` varchar(20) DEFAULT NULL,
-  `h_address` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`h_name`),
-  KEY `hotel_id` (`hotel_id`),
-  CONSTRAINT `hotel_ibfk_1` FOREIGN KEY (`hotel_id`) REFERENCES `city` (`city_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `dailyCost` decimal(6,2) NOT NULL,
+  `address` varchar(30) DEFAULT NULL,
+  `locationid` int NOT NULL,
+  `roomAvi` int NOT NULL,
+  `roomBook` int NOT NULL,
+  `noOfStar` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `locationid` (`locationid`),
+  CONSTRAINT `hotel_ibfk_1` FOREIGN KEY (`locationid`) REFERENCES `tourist_place` (`id`),
+  CONSTRAINT `hotel_chk_1` CHECK ((`dailyCost` > 0)),
+  CONSTRAINT `hotel_chk_2` CHECK (((`noOfStar` >= 1) and (`noOfStar` <= 10)))
+) ENGINE=InnoDB AUTO_INCREMENT=2225 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +77,73 @@ CREATE TABLE `hotel` (
 
 LOCK TABLES `hotel` WRITE;
 /*!40000 ALTER TABLE `hotel` DISABLE KEYS */;
+INSERT INTO `hotel` VALUES (2222,'SHRI SAI HOTEL',1200.00,'Surathkal',3112,100,23,10),(2223,'SHRI SAI HOTEL1',1100.00,'Surathkal1',3113,100,23,8),(2224,'SHRI SAI HOTEL2',1000.00,'Surathkal2',3114,100,23,7);
 /*!40000 ALTER TABLE `hotel` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hotelbook`
+--
+
+DROP TABLE IF EXISTS `hotelbook`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `hotelbook` (
+  `id` int NOT NULL,
+  `username` varchar(20) DEFAULT NULL,
+  `hotelid` int NOT NULL,
+  `checkin` date NOT NULL,
+  `checkout` date NOT NULL,
+  `noOfrooms` int NOT NULL,
+  `paymentid` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `username` (`username`),
+  KEY `hotelid` (`hotelid`),
+  KEY `paymentid` (`paymentid`),
+  CONSTRAINT `hotelbook_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`),
+  CONSTRAINT `hotelbook_ibfk_2` FOREIGN KEY (`hotelid`) REFERENCES `hotel` (`id`),
+  CONSTRAINT `hotelbook_ibfk_3` FOREIGN KEY (`paymentid`) REFERENCES `payment` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hotelbook`
+--
+
+LOCK TABLES `hotelbook` WRITE;
+/*!40000 ALTER TABLE `hotelbook` DISABLE KEYS */;
+INSERT INTO `hotelbook` VALUES (7777,'akbhobhiya',2222,'2020-05-30','2020-05-31',1,4),(7778,'asisrout',2223,'2020-05-30','2020-06-05',2,5),(7779,'jeeuk',2224,'2020-05-30','2020-06-05',2,6);
+/*!40000 ALTER TABLE `hotelbook` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `payment`
+--
+
+DROP TABLE IF EXISTS `payment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `payment` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `paymentType` enum('debit','credit') DEFAULT NULL,
+  `cardNo` varchar(16) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `username` (`username`),
+  CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`),
+  CONSTRAINT `payment_chk_1` CHECK ((`amount` > 0))
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `payment`
+--
+
+LOCK TABLES `payment` WRITE;
+/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+INSERT INTO `payment` VALUES (1,'akbhobhiya',37765.53,'debit','1234567890123456'),(2,'asisrout',34222.30,'debit','1234567890123456'),(3,'jeeuk',30701.07,'debit','1234567890123456'),(4,'akbhobhiya',1200.00,'debit','1234567890123456'),(5,'asisrout',2200.00,'debit','1234567890123456'),(6,'jeeuk',2000.00,'debit','1234567890123456');
+/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -156,14 +154,15 @@ DROP TABLE IF EXISTS `place_pics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `place_pics` (
-  `pic_id` int NOT NULL,
-  `caption` varchar(50) DEFAULT NULL,
-  `img` longblob NOT NULL,
-  `place_id` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`pic_id`),
-  KEY `place_id` (`place_id`),
-  CONSTRAINT `place_pics_ibfk_1` FOREIGN KEY (`place_id`) REFERENCES `tourist_place` (`place_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `locationid` int NOT NULL,
+  `caption` varchar(50) DEFAULT 'pic',
+  `description` varchar(1000) DEFAULT NULL,
+  `img` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `locationid` (`locationid`),
+  CONSTRAINT `place_pics_ibfk_1` FOREIGN KEY (`locationid`) REFERENCES `tourist_place` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4325 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,61 +171,76 @@ CREATE TABLE `place_pics` (
 
 LOCK TABLES `place_pics` WRITE;
 /*!40000 ALTER TABLE `place_pics` DISABLE KEYS */;
+INSERT INTO `place_pics` VALUES (4322,3112,'its a clockHouse','mana ki yahi clockhouse hai apn jayada kuch nahi kar sakte hai','/home/ashok/Desktop/image/clock.jpg'),(4323,3113,'its a Hawamahal','mana ki yahi hawamahal hai apn jayada kuch nahi kar sakte hai','/home/ashok/Desktop/image/hawamahal.jpg'),(4324,3114,'its a lack','mana ki yahi lack hai apn jayada kuch nahi kar sakte hai','/home/ashok/Desktop/image/lack.jpg');
 /*!40000 ALTER TABLE `place_pics` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `railway_station`
+-- Table structure for table `review`
 --
 
-DROP TABLE IF EXISTS `railway_station`;
+DROP TABLE IF EXISTS `review`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `railway_station` (
-  `station_id` varchar(20) NOT NULL,
-  `s_name` varchar(50) NOT NULL,
-  `s_contact` varchar(20) DEFAULT NULL,
-  `s_address` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`s_name`),
-  KEY `station_id` (`station_id`),
-  CONSTRAINT `railway_station_ibfk_1` FOREIGN KEY (`station_id`) REFERENCES `city` (`city_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `review` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `numStars` int NOT NULL,
+  `locationid` int NOT NULL,
+  `detailedReview` varchar(1000) DEFAULT NULL,
+  `submissionDate` datetime NOT NULL,
+  `author` varchar(35) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `author` (`author`),
+  KEY `locationid` (`locationid`),
+  CONSTRAINT `review_ibfk_1` FOREIGN KEY (`author`) REFERENCES `users` (`username`),
+  CONSTRAINT `review_ibfk_2` FOREIGN KEY (`locationid`) REFERENCES `tourist_place` (`id`),
+  CONSTRAINT `review_chk_1` CHECK (((`numStars` >= 1) and (`numStars` <= 10)))
+) ENGINE=InnoDB AUTO_INCREMENT=1519 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `railway_station`
+-- Dumping data for table `review`
 --
 
-LOCK TABLES `railway_station` WRITE;
-/*!40000 ALTER TABLE `railway_station` DISABLE KEYS */;
-/*!40000 ALTER TABLE `railway_station` ENABLE KEYS */;
+LOCK TABLES `review` WRITE;
+/*!40000 ALTER TABLE `review` DISABLE KEYS */;
+INSERT INTO `review` VALUES (1516,8,3112,'its a good place to visit','2020-05-30 18:41:35','akbhobhiya'),(1517,10,3113,'its a very good place to visit','2020-05-30 18:45:35','asisrout'),(1518,4,3114,'its a not a good place to visit','2020-05-30 18:47:35','jeeuk');
+/*!40000 ALTER TABLE `review` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `ticket`
+-- Table structure for table `tourbook`
 --
 
-DROP TABLE IF EXISTS `ticket`;
+DROP TABLE IF EXISTS `tourbook`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ticket` (
-  `ticket_id` varchar(20) NOT NULL,
-  `ticket_number` varchar(50) DEFAULT NULL,
-  `ticket_amount` int NOT NULL,
-  `ticket_total` int NOT NULL,
-  `ticket_time` datetime NOT NULL,
-  PRIMARY KEY (`ticket_id`),
-  CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`ticket_id`) REFERENCES `tourist_place` (`place_id`)
+CREATE TABLE `tourbook` (
+  `id` int NOT NULL,
+  `username` varchar(20) DEFAULT NULL,
+  `locationid` int NOT NULL,
+  `checkin` date NOT NULL,
+  `checkout` date NOT NULL,
+  `noOfticket` int NOT NULL,
+  `paymentid` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `username` (`username`),
+  KEY `locationid` (`locationid`),
+  KEY `paymentid` (`paymentid`),
+  CONSTRAINT `tourbook_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`),
+  CONSTRAINT `tourbook_ibfk_2` FOREIGN KEY (`locationid`) REFERENCES `tourist_place` (`id`),
+  CONSTRAINT `tourbook_ibfk_3` FOREIGN KEY (`paymentid`) REFERENCES `payment` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ticket`
+-- Dumping data for table `tourbook`
 --
 
-LOCK TABLES `ticket` WRITE;
-/*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
+LOCK TABLES `tourbook` WRITE;
+/*!40000 ALTER TABLE `tourbook` DISABLE KEYS */;
+INSERT INTO `tourbook` VALUES (1111,'akbhobhiya',3112,'2020-05-30','2020-05-31',11,1),(1112,'asisrout',3113,'2020-05-30','2020-06-01',10,2),(1113,'jeeuk',3114,'2020-05-30','2020-06-05',9,3);
+/*!40000 ALTER TABLE `tourbook` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -237,14 +251,17 @@ DROP TABLE IF EXISTS `tourist_place`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tourist_place` (
-  `place_id` varchar(20) NOT NULL,
-  `place_name` varchar(50) NOT NULL,
-  `description` varchar(1024) DEFAULT NULL,
-  `place_pin` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`place_id`),
-  KEY `place_pin` (`place_pin`),
-  CONSTRAINT `tourist_place_ibfk_1` FOREIGN KEY (`place_pin`) REFERENCES `city` (`city_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `city` varchar(30) NOT NULL,
+  `region` varchar(20) NOT NULL,
+  `country` varchar(20) NOT NULL DEFAULT 'IN',
+  `dailyCost` decimal(6,2) NOT NULL,
+  `aviTour` int NOT NULL,
+  `bookedTour` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `city` (`city`,`region`,`country`),
+  CONSTRAINT `tourist_place_chk_1` CHECK ((`dailyCost` > 0))
+) ENGINE=InnoDB AUTO_INCREMENT=3115 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -253,33 +270,36 @@ CREATE TABLE `tourist_place` (
 
 LOCK TABLES `tourist_place` WRITE;
 /*!40000 ALTER TABLE `tourist_place` DISABLE KEYS */;
+INSERT INTO `tourist_place` VALUES (3112,'Churu','ClockHouse','India',3433.23,100,25),(3113,'jaipur','hawamahal','India',3422.23,125,50),(3114,'udaipur','sambharlack','India',3411.23,75,50);
 /*!40000 ALTER TABLE `tourist_place` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `train`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `train`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `train` (
-  `train_id` varchar(20) NOT NULL,
-  `train_name` varchar(50) NOT NULL,
-  `train_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`train_name`),
-  KEY `train_id` (`train_id`),
-  CONSTRAINT `train_ibfk_1` FOREIGN KEY (`train_id`) REFERENCES `railway_station` (`station_id`)
+CREATE TABLE `users` (
+  `username` varchar(10) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `fullname` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  UNIQUE KEY `username` (`username`,`email`),
+  UNIQUE KEY `username_2` (`username`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `train`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `train` WRITE;
-/*!40000 ALTER TABLE `train` DISABLE KEYS */;
-/*!40000 ALTER TABLE `train` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('akbhobhiya','kuchbhibolo','Ashok Bhobhiya','akbhobhiya2000@gmail.com'),('asisrout','kuchbhibolomat','Asis Rout','asisrout@gmail.com'),('jeeuk','kuchbhiboloabhi','Jeeu Kayshap','geetkayshap@gmail.com');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -291,4 +311,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-18  1:09:00
+-- Dump completed on 2020-05-31  1:13:37

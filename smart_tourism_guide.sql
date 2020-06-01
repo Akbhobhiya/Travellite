@@ -48,6 +48,25 @@ INSERT INTO `booking` VALUES (8888,'akbhobhiya',7777,1111),(8889,'asisrout',7778
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `city_in_hotel`
+--
+
+DROP TABLE IF EXISTS `city_in_hotel`;
+/*!50001 DROP VIEW IF EXISTS `city_in_hotel`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `city_in_hotel` AS SELECT 
+ 1 AS `hotelid`,
+ 1 AS `hotelname`,
+ 1 AS `hoteladd`,
+ 1 AS `rating`,
+ 1 AS `cost_per_room`,
+ 1 AS `room_avi`,
+ 1 AS `imgurl`,
+ 1 AS `cityid`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `hotel`
 --
 
@@ -63,6 +82,7 @@ CREATE TABLE `hotel` (
   `roomAvi` int NOT NULL,
   `roomBook` int NOT NULL,
   `noOfStar` int NOT NULL,
+  `img_url` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `locationid` (`locationid`),
   CONSTRAINT `hotel_ibfk_1` FOREIGN KEY (`locationid`) REFERENCES `tourist_place` (`id`),
@@ -77,7 +97,7 @@ CREATE TABLE `hotel` (
 
 LOCK TABLES `hotel` WRITE;
 /*!40000 ALTER TABLE `hotel` DISABLE KEYS */;
-INSERT INTO `hotel` VALUES (2222,'SHRI SAI HOTEL',1200.00,'Surathkal',3112,100,23,10),(2223,'SHRI SAI HOTEL1',1100.00,'Surathkal1',3113,100,23,8),(2224,'SHRI SAI HOTEL2',1000.00,'Surathkal2',3114,100,23,7);
+INSERT INTO `hotel` VALUES (2222,'SHRI SAI HOTEL',1200.00,'main road lal bhag',3112,100,23,10,''),(2223,'SHRI SAI HOTEL1',1100.00,'Bhuto vali road',3113,100,23,8,''),(2224,'SHRI SAI HOTEL2',1000.00,'Bhutni rahti hai yaha par',3114,100,23,7,'');
 /*!40000 ALTER TABLE `hotel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -301,6 +321,47 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES ('akbhobhiya','kuchbhibolo','Ashok Bhobhiya','akbhobhiya2000@gmail.com'),('asisrout','kuchbhibolomat','Asis Rout','asisrout@gmail.com'),('jeeuk','kuchbhiboloabhi','Jeeu Kayshap','geetkayshap@gmail.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'smart_travel_guide_webApp'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `get_hotel_from_city` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_hotel_from_city`(in Querycity varchar(100))
+begin
+select h.name,h.address,t.city,h.noOfStar as Rating, h.roomAvi,h.dailyCost as Price, h.img_url from hotel h, tourist_place t where h.locationid=t.id and t.city= Querycity;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Final view structure for view `city_in_hotel`
+--
+
+/*!50001 DROP VIEW IF EXISTS `city_in_hotel`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `city_in_hotel` AS select `h`.`id` AS `hotelid`,`h`.`name` AS `hotelname`,`h`.`address` AS `hoteladd`,`h`.`noOfStar` AS `rating`,`h`.`dailyCost` AS `cost_per_room`,`h`.`roomAvi` AS `room_avi`,`h`.`img_url` AS `imgurl`,`t`.`id` AS `cityid` from (`hotel` `h` join `tourist_place` `t`) where (`t`.`id` = `h`.`locationid`) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -311,4 +372,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-31  1:13:37
+-- Dump completed on 2020-06-02  0:06:43

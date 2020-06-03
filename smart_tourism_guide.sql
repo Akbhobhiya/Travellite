@@ -83,7 +83,10 @@ CREATE TABLE `hotel` (
   `roomBook` int NOT NULL,
   `noOfStar` int NOT NULL,
   `img_url` varchar(200) NOT NULL,
+  `amenities` varchar(1000) NOT NULL,
+  `abouthotel` varchar(1000) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
   KEY `locationid` (`locationid`),
   CONSTRAINT `hotel_ibfk_1` FOREIGN KEY (`locationid`) REFERENCES `tourist_place` (`id`),
   CONSTRAINT `hotel_chk_1` CHECK ((`dailyCost` > 0)),
@@ -97,7 +100,7 @@ CREATE TABLE `hotel` (
 
 LOCK TABLES `hotel` WRITE;
 /*!40000 ALTER TABLE `hotel` DISABLE KEYS */;
-INSERT INTO `hotel` VALUES (2222,'SHRI SAI HOTEL',1200.00,'main road lal bhag',3112,100,23,10,''),(2223,'SHRI SAI HOTEL1',1100.00,'Bhuto vali road',3113,100,23,8,''),(2224,'SHRI SAI HOTEL2',1000.00,'Bhutni rahti hai yaha par',3114,100,23,7,'');
+INSERT INTO `hotel` VALUES (2222,'SHRI SAI HOTEL',1200.00,'main road lal bhag',3112,100,23,10,'','',''),(2223,'SHRI SAI HOTEL1',1100.00,'Bhuto vali road',3113,100,23,8,'','',''),(2224,'SHRI SAI HOTEL2',1000.00,'Bhutni rahti hai yaha par',3114,100,23,7,'','','');
 /*!40000 ALTER TABLE `hotel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,6 +137,37 @@ LOCK TABLES `hotelbook` WRITE;
 /*!40000 ALTER TABLE `hotelbook` DISABLE KEYS */;
 INSERT INTO `hotelbook` VALUES (7777,'akbhobhiya',2222,'2020-05-30','2020-05-31',1,4),(7778,'asisrout',2223,'2020-05-30','2020-06-05',2,5),(7779,'jeeuk',2224,'2020-05-30','2020-06-05',2,6);
 /*!40000 ALTER TABLE `hotelbook` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hotelreview`
+--
+
+DROP TABLE IF EXISTS `hotelreview`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `hotelreview` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `hotelname` varchar(100) NOT NULL,
+  `detailedReview` varchar(1000) DEFAULT NULL,
+  `submissionDate` datetime NOT NULL,
+  `author` varchar(35) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `author` (`author`),
+  KEY `hotelname` (`hotelname`),
+  CONSTRAINT `hotelreview_ibfk_1` FOREIGN KEY (`author`) REFERENCES `users` (`username`),
+  CONSTRAINT `hotelreview_ibfk_2` FOREIGN KEY (`hotelname`) REFERENCES `hotel` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=1225 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hotelreview`
+--
+
+LOCK TABLES `hotelreview` WRITE;
+/*!40000 ALTER TABLE `hotelreview` DISABLE KEYS */;
+INSERT INTO `hotelreview` VALUES (1222,'SHRI SAI HOTEL','its a good place to visit','2020-05-30 18:41:35','akbhobhiya'),(1223,'SHRI SAI HOTEL1','its a very good place to visit','2020-05-30 18:45:35','asisrout'),(1224,'SHRI SAI HOTEL2','its a not a good place to visit','2020-05-30 18:47:35','jeeuk');
+/*!40000 ALTER TABLE `hotelreview` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -372,4 +406,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-02  0:06:43
+-- Dump completed on 2020-06-03  7:40:44

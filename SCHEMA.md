@@ -86,7 +86,10 @@
        roomAvi int not null,
        roomBook int not null,
        noOfStar int not null,
+       amenities varchar(1000) not null,
+       aboutHotel varchar(1000) not null,
        PRIMARY KEY(id),
+       PRIMARY KEY(name),
        FOREIGN KEY (locationid) REFERENCES tourist_place(id),
        CHECK (dailyCost > 0),
        CHECK (noOfStar >= 1 AND noOfStar <= 10)
@@ -116,5 +119,29 @@
        FOREIGN KEY(tourbookid) REFERENCES tourbook(id),
        FOREIGN KEY(username) REFERENCES users(username)
 );     
+
+## create table hotelreview (
+
+    id INT NOT NULL auto_increment,
+    hotelname varchar(100) not null,
+    detailedReview VARCHAR(1000),
+    submissionDate DATETIME NOT NULL,
+    author VARCHAR(35) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (author) REFERENCES users(username),
+    FOREIGN KEY(hotelname) REFERENCES hotel(name)
+);
+
+## create view city_in_hotel
+ 	as select h.id as hotelid,
+	h.name as hotelname,
+	h.address as hoteladd,
+	h.noOfStar as rating,
+	h.dailyCost as cost_per_room,
+	h.roomAvi as room_avi,
+	h.img_url as imgurl,
+	t.id as cityid
+	from hotel h, tourist_place t where t.id=h.locationid;
+
 
 

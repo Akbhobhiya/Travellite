@@ -118,14 +118,11 @@ CREATE TABLE `hotelbook` (
   `checkin` date NOT NULL,
   `checkout` date NOT NULL,
   `noOfrooms` int NOT NULL,
-  `paymentid` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`),
   KEY `hotelid` (`hotelid`),
-  KEY `paymentid` (`paymentid`),
   CONSTRAINT `hotelbook_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`),
-  CONSTRAINT `hotelbook_ibfk_2` FOREIGN KEY (`hotelid`) REFERENCES `hotel` (`id`),
-  CONSTRAINT `hotelbook_ibfk_3` FOREIGN KEY (`paymentid`) REFERENCES `payment` (`id`)
+  CONSTRAINT `hotelbook_ibfk_2` FOREIGN KEY (`hotelid`) REFERENCES `hotel` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -135,7 +132,7 @@ CREATE TABLE `hotelbook` (
 
 LOCK TABLES `hotelbook` WRITE;
 /*!40000 ALTER TABLE `hotelbook` DISABLE KEYS */;
-INSERT INTO `hotelbook` VALUES (7777,'akbhobhiya',2222,'2020-05-30','2020-05-31',1,4),(7778,'asisrout',2223,'2020-05-30','2020-06-05',2,5),(7779,'jeeuk',2224,'2020-05-30','2020-06-05',2,6);
+INSERT INTO `hotelbook` VALUES (7777,'akbhobhiya',2222,'2020-05-30','2020-05-31',1),(7778,'asisrout',2223,'2020-05-30','2020-06-05',2),(7779,'jeeuk',2224,'2020-05-30','2020-06-05',2);
 /*!40000 ALTER TABLE `hotelbook` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,36 +165,6 @@ LOCK TABLES `hotelreview` WRITE;
 /*!40000 ALTER TABLE `hotelreview` DISABLE KEYS */;
 INSERT INTO `hotelreview` VALUES (1222,'SHRI SAI HOTEL','its a good place to visit','2020-05-30 18:41:35','akbhobhiya'),(1223,'SHRI SAI HOTEL1','its a very good place to visit','2020-05-30 18:45:35','asisrout'),(1224,'SHRI SAI HOTEL2','its a not a good place to visit','2020-05-30 18:47:35','jeeuk');
 /*!40000 ALTER TABLE `hotelreview` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `payment`
---
-
-DROP TABLE IF EXISTS `payment`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `payment` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) NOT NULL,
-  `amount` decimal(10,2) NOT NULL,
-  `paymentType` enum('debit','credit') DEFAULT NULL,
-  `cardNo` varchar(16) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `username` (`username`),
-  CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`),
-  CONSTRAINT `payment_chk_1` CHECK ((`amount` > 0))
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `payment`
---
-
-LOCK TABLES `payment` WRITE;
-/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
-INSERT INTO `payment` VALUES (1,'akbhobhiya',37765.53,'debit','1234567890123456'),(2,'asisrout',34222.30,'debit','1234567890123456'),(3,'jeeuk',30701.07,'debit','1234567890123456'),(4,'akbhobhiya',1200.00,'debit','1234567890123456'),(5,'asisrout',2200.00,'debit','1234567890123456'),(6,'jeeuk',2000.00,'debit','1234567890123456');
-/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -276,14 +243,12 @@ CREATE TABLE `tourbook` (
   `checkin` date NOT NULL,
   `checkout` date NOT NULL,
   `noOfticket` int NOT NULL,
-  `paymentid` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`),
   KEY `locationid` (`locationid`),
-  KEY `paymentid` (`paymentid`),
   CONSTRAINT `tourbook_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`),
-  CONSTRAINT `tourbook_ibfk_2` FOREIGN KEY (`locationid`) REFERENCES `tourist_place` (`id`),
-  CONSTRAINT `tourbook_ibfk_3` FOREIGN KEY (`paymentid`) REFERENCES `payment` (`id`)
+  CONSTRAINT `tourbook_ibfk_4` FOREIGN KEY (`locationid`) REFERENCES `tourist_place` (`id`),
+  CONSTRAINT `tourbook_ibfk_5` FOREIGN KEY (`locationid`) REFERENCES `tourist_place` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -293,7 +258,7 @@ CREATE TABLE `tourbook` (
 
 LOCK TABLES `tourbook` WRITE;
 /*!40000 ALTER TABLE `tourbook` DISABLE KEYS */;
-INSERT INTO `tourbook` VALUES (1111,'akbhobhiya',3112,'2020-05-30','2020-05-31',11,1),(1112,'asisrout',3113,'2020-05-30','2020-06-01',10,2),(1113,'jeeuk',3114,'2020-05-30','2020-06-05',9,3);
+INSERT INTO `tourbook` VALUES (1111,'akbhobhiya',3112,'2020-05-30','2020-05-31',11),(1112,'asisrout',3113,'2020-05-30','2020-06-01',10),(1113,'jeeuk',3114,'2020-05-30','2020-06-05',9);
 /*!40000 ALTER TABLE `tourbook` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -406,4 +371,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-03  7:40:44
+-- Dump completed on 2020-06-06  0:38:48

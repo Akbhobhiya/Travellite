@@ -49,7 +49,7 @@
        FOREIGN KEY (locationid) REFERENCES tourist_place(id)
 );
 
-## create table payment (
+<!-- ## create table payment (
        id INT NOT NULL AUTO_INCREMENT,
        username VARCHAR(20) not null,
        amount DECIMAL(10,2) NOT NULL,
@@ -59,7 +59,7 @@
        FOREIGN KEY(username) REFERENCES users(username),
        CHECK (amount > 0)
 );
-
+ -->
 
 ## create table tourbook(
        id int not null,
@@ -68,11 +68,11 @@
        checkin date not null,
        checkout date not null,
        noOfticket int not null,
-       paymentid int not null,
+       <!-- paymentid int not null, -->
        primary key(id),
        FOREIGN key(username) REFERENCES users(username),
        FOREIGN key(locationid) REFERENCES tourist_place(id),
-       FOREIGN KEY(paymentid) REFERENCES payment(id)
+       <!-- FOREIGN KEY(paymentid) REFERENCES payment(id) -->
 
 );
 
@@ -102,11 +102,11 @@
        checkin date not null,
        checkout date not null,
        noOfrooms int not null,
-       paymentid int not null,
+       <!-- paymentid int not null, -->
        primary key(id),
        FOREIGN key(username) REFERENCES users(username),
        FOREIGN key(hotelid) REFERENCES hotel(id),
-       FOREIGN KEY(paymentid) REFERENCES payment(id)
+       <!-- FOREIGN KEY(paymentid) REFERENCES payment(id) -->
 );
 
 ## create table booking (
